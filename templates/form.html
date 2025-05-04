@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div>
+    {{ title }}
+</div>
+<form action="" method="post">
+    <h1>{{ question }}. {{ text }}</h1>
+    <p>
+        {{ form.choces_button() }}
+    </p>
+    <p>
+        {% if question > 1 %}
+            <a href="/back" class="btn btn-danger">Назад</a>
+            {{ form.submit(type="submit", class="btn btn-primary") }}
+        {% else %}
+            {{ form.submit(type="submit", class="btn btn-primary") }}
+        {% endif %}
+    </p>
+    {{ form.csrf_token }}
+</form>
+{% endblock %}

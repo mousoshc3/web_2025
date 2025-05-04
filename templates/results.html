@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block content %}
+<form action="" method="post">
+    <div>
+        <ol>
+        {% for univ in universities %}
+            <li>{{ univ[0] }}</li>
+            <div>
+                {% for u in univ[1] %}
+                    <div>
+                        <ul>
+                            <li>
+                                <img src="{{ u[1] }}">
+                                {{ u[0] }}
+                            </li>
+                        </ul>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endfor %}
+        </ol>
+    </div>
+</form>
+{% endblock %}

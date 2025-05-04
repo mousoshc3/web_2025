@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block content %}
+<form action="" method="post">
+    {{ form.csrf_token }}
+    <a href="/new_form">Создать новую анкету</a>
+    <div>
+        <div>
+            {{ form.search_field(class="line") }}
+            {{ form.search_choose }}
+            {{ form.submit }}
+        </div>
+        <div>
+            Записей найдено: {{ lenght }}
+        </div>
+        <br>
+        <table>
+            <tr colspan="5" style="text-align:center" bgcolor="#affdff">
+                <th>Никнейм</th>
+                <th>Почта</th>
+                <th>Дата создания</th>
+                <th>Класс</th>
+                <th>Права</th>
+                <th>Анкета</th>
+            </tr>
+            {% for user, answer in users %}
+                <tr colspan="5" style="text-align:center">
+                    <td>{{ user.name }}</td>
+                    <td>{{ user.email }}</td>
+                    <td>{{ user.created_date }}</td>
+                    <!-- Класс пользователя -->
+                    {% if user.special_rights == 0 %}
+                        <td>{{ user.user_class }}</td>
+                    {% elif user.special_rights == 1 %}
+                        <td>-</td>
+                    {% endif %}
+                    <!-- Статус пользователя -->
+                    {% if user.special_rights == 0 %}
+                        <td>User</td>
+                    {% elif user.special_rights == 1 %}
+                        <td bgcolor="#c2ff00">Admin</td>
+                    {% endif %}
+                    <!-- Статус анкеты -->
+                    {% if answer.completed == 0 %}
+                        <td>Начато</td>
+                    {% elif answer.completed == 1 %}
+                        <td bgcolor="#fffa2e">Завершено</td>
+                    {% elif not answer.completed %}
+                        <td>-</td>
+                    {% endif %}
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+</form>
+{% endblock %}
